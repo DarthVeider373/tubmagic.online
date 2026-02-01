@@ -1,21 +1,25 @@
-<!DOCTYPE html><html lang="pt-BR"><head><meta name="x-poe-datastore-behavior" content="local_only"><meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com https://fonts.googleapis.com https://fonts.gstatic.com https://pfst.cf2.poecdn.net https://puc.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com https://picsum.photos https://images.unsplash.com; frame-src 'self' https://www.youtube.com https://trytako.com; child-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests; block-all-mixed-content;">
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Verificação de Idade</title>
-
     <script
-  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
-  data-utmify-prevent-xcod-sck
-  data-utmify-prevent-subids
-  async
-  defer
-></script>
-    
+        src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+        data-utmify-prevent-xcod-sck
+        data-utmify-prevent-subids
+        async
+        defer
+    ></script>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
         }
 
         html {
@@ -29,9 +33,6 @@
             min-height: 100dvh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 16px;
             position: relative;
             overflow-x: hidden;
         }
@@ -47,17 +48,20 @@
             pointer-events: none;
         }
 
+        .main-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+        }
+
         .container {
             text-align: center;
             max-width: 480px;
             width: 100%;
             position: relative;
             z-index: 1;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 20px 0;
         }
 
         .ornament-top {
@@ -141,12 +145,12 @@
             text-decoration: none;
             display: inline-block;
             text-align: center;
+            border: none;
         }
 
         .btn-yes {
             background: linear-gradient(135deg, #d4af37 0%, #b8962e 100%);
             color: #0a1628;
-            border: none;
             box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
         }
 
@@ -198,12 +202,15 @@
         /* Disclaimer */
         .disclaimer {
             width: 100%;
-            max-width: 700px;
-            margin-top: 40px;
             padding: 24px 16px;
             border-top: 1px solid rgba(212, 175, 55, 0.1);
             position: relative;
             z-index: 1;
+        }
+
+        .disclaimer-content {
+            max-width: 700px;
+            margin: 0 auto;
         }
 
         .disclaimer p {
@@ -232,7 +239,7 @@
 
         /* Tablet (min-width: 480px) */
         @media (min-width: 480px) {
-            body {
+            .main-wrapper {
                 padding: 20px;
             }
 
@@ -297,7 +304,6 @@
             }
 
             .disclaimer {
-                margin-top: 50px;
                 padding: 28px 20px;
             }
 
@@ -312,7 +318,7 @@
 
         /* Desktop (min-width: 768px) */
         @media (min-width: 768px) {
-            body {
+            .main-wrapper {
                 padding: 24px;
             }
 
@@ -366,7 +372,6 @@
             }
 
             .disclaimer {
-                margin-top: 60px;
                 padding: 30px 24px;
             }
 
@@ -432,12 +437,8 @@
 
         /* Landscape orientation on mobile */
         @media (max-height: 500px) and (orientation: landscape) {
-            body {
+            .main-wrapper {
                 padding: 12px;
-            }
-
-            .container {
-                padding: 10px 0;
             }
 
             .ornament-top {
@@ -493,7 +494,6 @@
             }
 
             .disclaimer {
-                margin-top: 20px;
                 padding: 16px 12px;
             }
         }
@@ -515,66 +515,86 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="stars">
-            <div class="star"></div>
-            <div class="star"></div>
-            <div class="star"></div>
+    <div class="main-wrapper">
+        <div class="container">
+            <div class="stars">
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+            </div>
+
+            <div class="ornament-top"></div>
+
+            <div class="icon">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Esquadro -->
+                    <path d="M20 25 L50 75 L80 25" fill="none" stroke="#d4af37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <!-- Compasso -->
+                    <path d="M30 70 L50 30 L70 70" fill="none" stroke="#d4af37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <!-- Letra G -->
+                    <text x="50" y="56" text-anchor="middle" font-family="Georgia, serif" font-size="14" font-weight="600" fill="#d4af37">G</text>
+                </svg>
+            </div>
+
+            <p class="label">Verificação de idade</p>
+            
+            <h1 class="question">Você tem mais de 22 anos?</h1>
+            
+            <div class="divider"></div>
+
+            <div class="buttons">
+                <button class="btn btn-yes" onclick="redirectWithUTM()">Sim, tenho</button>
+                <button class="btn btn-no" onclick="redirectWithUTM()">Não</button>
+            </div>
+
+            <p class="footer">Seus dados estão protegidos</p>
+
+            <div class="ornament-bottom"></div>
         </div>
-
-        <div class="ornament-top"></div>
-
-        <div class="icon">
-            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <!-- Esquadro -->
-                <path d="M20 25 L50 75 L80 25" fill="none" stroke="#d4af37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
-                <!-- Compasso -->
-                <path d="M30 70 L50 30 L70 70" fill="none" stroke="#d4af37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
-                <!-- Letra G -->
-                <text x="50" y="56" text-anchor="middle" font-family="Georgia, serif" font-size="14" font-weight="600" fill="#d4af37">G</text>
-            </svg>
-        </div>
-
-        <p class="label">Verificação de idade</p>
-        
-        <h1 class="question">Você tem mais de 22 anos?</h1>
-        
-        <div class="divider"></div>
-
-        <div class="buttons">
-            <a href="https://tubmagic.online/triIhadapIenaIiberdadeinterior" class="btn btn-yes">Sim, tenho</a>
-            <a href="https://tubmagic.online/triIhadapIenaIiberdadeinterior" class="btn btn-no">Não</a>
-        </div>
-
-        <p class="footer">Seus dados estão protegidos</p>
-
-        <div class="ornament-bottom"></div>
     </div>
 
     <div class="disclaimer">
-        <p>
-            Este site não é afiliado ao YouTube ou ao Google LLC.<br>
-            Ele não é endossado nem patrocinado pelo YouTube de nenhuma forma.<br>
-            YouTube é uma marca registrada do Google LLC.
-        </p>
+        <div class="disclaimer-content">
+            <p>
+                Este site não é afiliado ao YouTube ou ao Google LLC.<br>
+                Ele não é endossado nem patrocinado pelo YouTube de nenhuma forma.<br>
+                YouTube é uma marca registrada do Google LLC.
+            </p>
 
-        <div class="disclaimer-divider"></div>
+            <div class="disclaimer-divider"></div>
 
-        <p>
-            Todo o conteúdo deste site é protegido por leis de direitos autorais e de propriedade intelectual.<br>
-            A reprodução ou distribuição de qualquer parte deste site sem permissão é proibida.
-        </p>
+            <p>
+                Todo o conteúdo deste site é protegido por leis de direitos autorais e de propriedade intelectual.<br>
+                A reprodução ou distribuição de qualquer parte deste site sem permissão é proibida.
+            </p>
 
-        <div class="disclaimer-divider"></div>
+            <div class="disclaimer-divider"></div>
 
-        <p>
-            As informações fornecidas têm caráter educacional e informativo apenas. Resultados individuais podem variar.<br>
-            O conteúdo oferecido não substitui orientação profissional, médica, financeira ou de qualquer outra natureza.<br>
-            Sempre consulte um profissional qualificado antes de tomar decisões baseadas nas informações apresentadas.
-        </p>
+            <p>
+                As informações fornecidas têm caráter educacional e informativo apenas. Resultados individuais podem variar.<br>
+                O conteúdo oferecido não substitui orientação profissional, médica, financeira ou de qualquer outra natureza.<br>
+                Sempre consulte um profissional qualificado antes de tomar decisões baseadas nas informações apresentadas.
+            </p>
 
-        <p>Todos os direitos reservados © 2025</p>
+            <p>Todos os direitos reservados © 2026</p>
+        </div>
     </div>
 
-
-</body></html>
+    <script>
+        function redirectWithUTM() {
+            // URL de destino
+            const destinationURL = 'https://tubmagic.online/triIhadapIenaIiberdadeinterior/';
+            
+            // Captura todos os parâmetros da URL atual
+            const currentParams = window.location.search;
+            
+            // Se existirem parâmetros, adiciona à URL de destino
+            if (currentParams) {
+                window.location.href = destinationURL + currentParams;
+            } else {
+                window.location.href = destinationURL;
+            }
+        }
+    </script>
+</body>
+</html>
