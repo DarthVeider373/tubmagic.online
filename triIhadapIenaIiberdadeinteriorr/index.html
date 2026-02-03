@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Video</title>
+
+    <script>!function (i, n) { i._plt = i._plt || (n && n.timeOrigin ? n.timeOrigin + n.now() : Date.now()) }(window, performance);</script>
+    <link rel="preload" href="https://scripts.converteai.net/cda0fd17-3b99-44d2-a83a-fc66435cb2df/players/697c2df91fdc17e64dde846a/v4/player.js" as="script">
+    <link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
+    <link rel="preload" href="https://cdn.converteai.net/cda0fd17-3b99-44d2-a83a-fc66435cb2df/697b6046a3ec0f5fa32c633d/main.m3u8" as="fetch">
+    <link rel="dns-prefetch" href="https://cdn.converteai.net">
+    <link rel="dns-prefetch" href="https://scripts.converteai.net">
+    <link rel="dns-prefetch" href="https://images.converteai.net">
+    <link rel="dns-prefetch" href="https://api.vturb.com.br">
+
+    <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async defer></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+            background: #0a1628 !important;
+        }
+
+        html {
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: #0a1628 !important;
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .main-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+            background: transparent !important;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 960px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+            background: transparent !important;
+        }
+
+        /* WRAPPER DO TOPO – controla o tamanho REAL */
+        .top-compact {
+            transform: scale(0.6);
+            transform-origin: top center;
+            margin-top: 32px;
+            /* MAIS espaço acima da logo */
+            margin-bottom: -40px;
+        }
+
+        .ornament-top {
+            width: 60px;
+            /* reduzido */
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+            margin: 0 auto 6px;
+            /* reduzido ainda mais */
+        }
+
+        .icon {
+            width: 36px;
+            /* reduzido ainda mais */
+            height: 36px;
+            /* reduzido ainda mais */
+            margin: 0 auto 6px;
+            /* reduzido ainda mais */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .icon::before {
+            content: '';
+            position: absolute;
+            width: 48px;
+            /* reduzido ainda mais */
+            height: 48px;
+            /* reduzido ainda mais */
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 50%;
+        }
+
+        .icon svg {
+            width: 28px;
+            /* reduzido ainda mais */
+            height: 28px;
+            /* reduzido ainda mais */
+            filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.25));
+        }
+
+        /* Mantido só para preservar o layout (sem texto visível) */
+        .divider {
+            width: 50px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+            margin: 0 auto 28px;
+        }
+
+        /* VTurb container - força transparência e evita “faixa branca” */
+        .vturb-section {
+            width: 100%;
+            margin: 32px auto 48px;
+            /* MAIS espaço abaixo do vídeo */
+            background: #0a1628;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        vturb-smartplayer {
+            display: block;
+            width: 100% !important;
+            max-width: 720px;
+            /* controla largura e mantém centralizado */
+            margin: 0 auto !important;
+            background: #0a1628 !important;
+        }
+
+        /* MOBILE FIX – centraliza vertical e horizontal */
+        @media (max-width: 768px) {
+            .main-wrapper {
+                align-items: flex-start;
+            }
+
+            .vturb-section {
+                margin-top: 12px;
+            }
+        }
+
+        /* VTURB FIX — garante fundo azul em toda a área do player */
+        .vturb-section {
+            background: #0a1628;
+            padding: 0;
+        }
+
+        vturb-smartplayer {
+            display: block;
+            background: #0a1628 !important;
+        }
+
+        /* buttons removidos */
+
+        /* btn styles removidos */
+
+        /* btn styles removidos */
+
+        /* btn styles removidos */
+
+        /* btn styles removidos */
+
+        /* btn styles removidos */
+
+        .ornament-bottom {
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #2a3a50, transparent);
+            margin: 20px auto 0;
+        }
+
+        .stars {
+            display: flex;
+            justify-content: center;
+            gap: 4px;
+            margin-bottom: 4px;
+            /* reduzido ainda mais */
+        }
+
+        .star {
+            width: 4px;
+            height: 4px;
+            background: #d4af37;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+        }
+
+        /* Disclaimer (FOOTER) */
+        .disclaimer {
+            width: 100%;
+            padding: 24px 16px;
+            border-top: 1px solid rgba(212, 175, 55, 0.15);
+            position: relative;
+            z-index: 1;
+            background: transparent !important;
+        }
+
+        .disclaimer-content {
+            max-width: 700px;
+            margin: 0 auto;
+            background: transparent !important;
+        }
+
+        .disclaimer p {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 0.5625rem;
+            color: rgba(255, 255, 255, 0.55) !important;
+            line-height: 1.9;
+            text-align: center;
+            margin-bottom: 14px;
+        }
+
+        .disclaimer p:last-child {
+            margin-bottom: 0;
+            color: #d4af37;
+            font-size: 0.5rem;
+            letter-spacing: 1px;
+            margin-top: 20px;
+        }
+
+        .disclaimer-divider {
+            width: 30px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #2a3a50, transparent);
+            margin: 16px auto;
+        }
+
+        /* Tablet (min-width: 480px) */
+        @media (min-width: 480px) {
+            .main-wrapper {
+                padding: 20px;
+            }
+
+            .ornament-top {
+                width: 100px;
+                margin-bottom: 32px;
+            }
+
+            .icon {
+                width: 85px;
+                height: 85px;
+                margin-bottom: 28px;
+            }
+
+            .icon::before {
+                width: 105px;
+                height: 105px;
+            }
+
+            .icon svg {
+                width: 70px;
+                height: 70px;
+            }
+
+            .divider {
+                width: 60px;
+                margin-bottom: 36px;
+            }
+
+            .buttons {
+                flex-direction: row;
+                justify-content: center;
+                gap: 16px;
+            }
+
+            /* btn styles removidos */
+
+            .stars .star {
+                width: 5px;
+                height: 5px;
+            }
+
+            .disclaimer {
+                padding: 28px 20px;
+            }
+
+            .disclaimer p {
+                font-size: 0.65rem;
+            }
+
+            .disclaimer p:last-child {
+                font-size: 0.6rem;
+            }
+        }
+
+        /* Desktop (min-width: 768px) */
+        @media (min-width: 768px) {
+            .main-wrapper {
+                padding: 24px;
+            }
+
+            .ornament-top {
+                width: 120px;
+                margin-bottom: 40px;
+            }
+
+            .icon {
+                width: 100px;
+                height: 100px;
+                margin-bottom: 32px;
+            }
+
+            .icon::before {
+                width: 120px;
+                height: 120px;
+            }
+
+            .icon svg {
+                width: 80px;
+                height: 80px;
+            }
+
+            .divider {
+                margin-bottom: 40px;
+            }
+
+            .buttons {
+                gap: 20px;
+            }
+
+            /* btn styles removidos */
+
+            .disclaimer {
+                padding: 30px 24px;
+            }
+
+            .disclaimer p {
+                font-size: 0.7rem;
+            }
+
+            .disclaimer p:last-child {
+                font-size: 0.65rem;
+            }
+        }
+
+        /* Large Desktop (min-width: 1024px) */
+        @media (min-width: 1024px) {
+            .disclaimer p {
+                font-size: 0.75rem;
+                line-height: 2;
+            }
+
+            .disclaimer p:last-child {
+                font-size: 0.7rem;
+            }
+        }
+
+        /* Extra small devices (max-width: 320px) */
+        @media (max-width: 320px) {
+            html {
+                font-size: 14px;
+            }
+
+            /* mantém topo compacto e central */
+            .top-compact {
+                transform: scale(0.55);
+                margin-bottom: -56px;
+            }
+
+            /* player ocupa quase toda a tela, centralizado */
+            vturb-smartplayer {
+                max-width: 100%;
+            }
+
+            .disclaimer p {
+                font-size: 0.5rem;
+            }
+        }
+
+        .icon {
+            width: 60px;
+            height: 60px;
+        }
+
+        .icon::before {
+            width: 78px;
+            height: 78px;
+        }
+
+        .icon svg {
+            width: 50px;
+            height: 50px;
+        }
+
+        /* btn styles removidos */
+        .disclaimer p {
+            font-size: 0.5rem;
+        }
+
+        /* Landscape orientation on mobile */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .main-wrapper {
+                padding: 12px;
+            }
+
+            .ornament-top {
+                margin-bottom: 16px;
+            }
+
+            .icon {
+                width: 50px;
+                height: 50px;
+                margin-bottom: 12px;
+            }
+
+            .icon::before {
+                width: 65px;
+                height: 65px;
+            }
+
+            .icon svg {
+                width: 40px;
+                height: 40px;
+            }
+
+            .divider {
+                margin-bottom: 16px;
+            }
+
+            .buttons {
+                flex-direction: row;
+                gap: 12px;
+            }
+
+            /* btn styles removidos */
+
+            .stars {
+                margin-bottom: 12px;
+            }
+
+            .disclaimer {
+                padding: 16px 12px;
+            }
+        }
+
+        /* Touch device optimizations */
+        @media (hover: none) and (pointer: coarse) {
+            /* btn styles removidos */
+            /* btn styles removidos */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-wrapper">
+        <div class="container">
+            <div class="top-compact">
+                <div class="stars">
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                </div>
+
+                <div class="ornament-top"></div>
+
+                <div class="icon">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Esquadro -->
+                        <path d="M20 25 L50 75 L80 25" fill="none" stroke="#d4af37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                        <!-- Compasso -->
+                        <path d="M30 70 L50 30 L70 70" fill="none" stroke="#d4af37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                        <!-- Letra G -->
+                        <text x="50" y="56" text-anchor="middle" font-family="Georgia, serif" font-size="14" font-weight="600" fill="#d4af37">G</text>
+                    </svg>
+                </div>
+
+                <!-- Textos removidos conforme solicitado: label, pergunta, textos dos botões e frase "Seus dados estão protegidos" -->
+
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- VTURB EMBED SECTION (NÃO ALTERAR O CÓDIGO ABAIXO) -->
+            <section class="vturb-section">
+
+
+                <vturb-smartplayer id="vid-697c2df91fdc17e64dde846a" style="display: block; margin: 0 auto; width: 100%; "></vturb-smartplayer>
+                <script type="text/javascript"> var s = document.createElement("script"); s.src = "https://scripts.converteai.net/cda0fd17-3b99-44d2-a83a-fc66435cb2df/players/697c2df91fdc17e64dde846a/v4/player.js", s.async = !0, document.head.appendChild(s); </script>
+
+
+            </section>
+            <!-- /VTURB EMBED SECTION -->
+
+            <div class="ornament-bottom"></div>
+        </div>
+    </div>
+
+    <div class="disclaimer">
+        <div class="disclaimer-content">
+            <p>
+                Este site não é afiliado ao YouTube ou ao Google LLC.<br>
+                Ele não é endossado nem patrocinado pelo YouTube de nenhuma forma.<br>
+                YouTube é uma marca registrada do Google LLC.
+            </p>
+
+            <div class="disclaimer-divider"></div>
+
+            <p>
+                Todo o conteúdo deste site é protegido por leis de direitos autorais e de propriedade intelectual.<br>
+                A reprodução ou distribuição de qualquer parte deste site sem permissão é proibida.
+            </p>
+
+            <div class="disclaimer-divider"></div>
+
+            <p>
+                As informações fornecidas têm caráter educacional e informativo apenas. Resultados individuais podem variar.<br>
+                O conteúdo oferecido não substitui orientação profissional, médica, financeira ou de qualquer outra natureza.<br>
+                Sempre consulte um profissional qualificado antes de tomar decisões baseadas nas informações apresentadas.
+            </p>
+
+            <p>Todos os direitos reservados © 2026</p>
+        </div>
+    </div>
+
+    <script>
+        function redirectWithUTM() {
+            const destinationURL = 'https://looktub.online/triIhadapIenaIiberdadeinterior/';
+            const currentParams = window.location.search;
+
+            if (currentParams) {
+                window.location.href = destinationURL + currentParams;
+            } else {
+                window.location.href = destinationURL;
+            }
+        }
+    </script>
+</body>
+
+</html>
